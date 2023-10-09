@@ -34,6 +34,7 @@ public interface DishMapper {
 
     /**
      * 菜品分页查询
+     *
      * @param dishPageQueryDTO
      * @return
      */
@@ -41,6 +42,7 @@ public interface DishMapper {
 
     /**
      * 根据主键查询菜品
+     *
      * @param id
      * @return
      */
@@ -49,6 +51,7 @@ public interface DishMapper {
 
     /**
      * 根据主键删除菜品数据
+     *
      * @param id
      */
     @Delete("delete from dish where id = #{id}")
@@ -56,14 +59,31 @@ public interface DishMapper {
 
     /**
      * 根据菜品id集合批量删除菜品
+     *
      * @param ids
      */
     void deleteByIds(List<Long> ids);
 
     /**
      * 根据id动态修改菜品
+     *
      * @param dish
      */
     @AutoFill(value = OperationType.UPDATE)
     void update(Dish dish);
+
+    /**
+     * 根据分类id查询菜品
+     * @param dish
+     * @return
+     */
+    List<Dish> list(Dish dish);
+
+    /**
+     * 根据套餐id查询菜品
+     * @param id
+     * @return
+     */
+    @Select("select a.* from dish a left join setmeal_dish b on a.id = b.dish_id where b.setmeal_id = #{id}")
+    List<Dish> getBySetmealId(Long id);
 }

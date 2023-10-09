@@ -108,6 +108,7 @@ public class DishServiceImpl implements DishService {
 
     /**
      * 根据id查询菜品和对应口味数据
+     *
      * @param id
      * @return
      */
@@ -118,18 +119,19 @@ public class DishServiceImpl implements DishService {
         List<DishFlavor> dishFlavors = dishFlavorMapper.getByDishId(id);
         //将查询到的数据封装到DishVo
         DishVO dishVO = new DishVO();
-        BeanUtils.copyProperties(dish,dishVO);
+        BeanUtils.copyProperties(dish, dishVO);
         dishVO.setFlavors(dishFlavors);
         return dishVO;
     }
 
     /**
      * 根据id修改菜品基本信息和对应的口味信息
+     *
      * @param dishDTO
      */
     public void updateWithFlavor(DishDTO dishDTO) {
         Dish dish = new Dish();
-        BeanUtils.copyProperties(dishDTO,dish);
+        BeanUtils.copyProperties(dishDTO, dish);
         //修改菜品表基本信息
         dishMapper.update(dish);
         //删除原有的口味数据
@@ -143,5 +145,18 @@ public class DishServiceImpl implements DishService {
             //向口味表插入n条数据
             dishFlavorMapper.insertBatch(flavors);
         }
+    }
+
+    /**
+     * 根据分类id查询菜品
+     * @param categoryId
+     * @return
+     */
+    public List<Dish> list(Long categoryId) {
+        Dish dish = Dish.builder()
+                .categoryId(categoryId)
+                .status(StatusConstant.ENABLE)
+                .build();
+        return dishMapper.list(dish);
     }
 }
