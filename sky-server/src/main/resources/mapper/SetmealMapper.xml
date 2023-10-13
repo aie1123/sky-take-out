@@ -24,7 +24,7 @@
         </where>
         order by s.create_time desc
     </select>
-    <update id="update">
+    <update id="update" parameterType="Setmeal">
         update setmeal
         <set>
             <if test="name != null">name = #{name},</if>
