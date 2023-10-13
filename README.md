@@ -4,7 +4,7 @@
 苍穹外卖练习
 
 #### 软件架构
-软件架构说明
+基于Spring Boot开发的C端应用和优化演进的外卖领域入门级项目
 
 #### 参与贡献
 
@@ -12,12 +12,11 @@
 2.  提交代码
 3.  新建 Pull Request
 
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+#### 学习收获
+1.  了解企业项目整体开发流程
+2.  掌握Spring Boot和主流框架集成实现项目的快速开发
+3.  掌握外卖行业相关的业务流程和功能架构
+4.  了解项目架构的演进过程
+5.  掌握需求分析的方法和需求到设计、实现的转化过程
+6.  掌握MySQL主从复制配置过程
+7.  掌握读写分离开发过程
