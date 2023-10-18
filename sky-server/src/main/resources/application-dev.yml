@@ -6,6 +6,7 @@ sky:
     database: sky_take_out
     username: root
     password: 1234
+    use-ping-method: false
   alioss:
     endpoint: oss-cn-chengdu.aliyuncs.com
     access-key-id: LTAI5tReT3C9JNfWh17ZWhSi
