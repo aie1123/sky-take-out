@@ -9,6 +9,7 @@
         values (#{categoryId}, #{name}, #{price}, #{status}, #{description}, #{image}, #{createTime}, #{updateTime},
                 #{createUser}, #{updateUser})
     </insert>
+
     <select id="pageQuery" resultType="com.sky.vo.SetmealVO">
         select s.* ,c.name as categoryName from setmeal s left join category c on s.category_id = c.id
         <where>
@@ -24,6 +25,7 @@
         </where>
         order by s.create_time desc
     </select>
+
     <update id="update" parameterType="Setmeal">
         update setmeal
         <set>
@@ -38,6 +40,7 @@
         </set>
         where id = #{id}
     </update>
+
     <delete id="deleteByIds">
         delete from dish where id in
         <foreach collection="ids" open="(" close=")" separator="," item="id">
@@ -56,6 +59,18 @@
             </if>
             <if test="status != null">
                 and status = #{status}
+            </if>
+        </where>
+    </select>
+
+    <select id="countByMap" resultType="java.lang.Integer">
+        select count(id) from setmeal
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
             </if>
         </where>
     </select>
