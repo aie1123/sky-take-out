@@ -9,9 +9,11 @@ import com.sky.context.BaseContext;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
+import com.sky.dto.PasswordEditDTO;
 import com.sky.entity.Employee;
 import com.sky.exception.AccountLockedException;
 import com.sky.exception.AccountNotFoundException;
+import com.sky.exception.PasswordEditFailedException;
 import com.sky.exception.PasswordErrorException;
 import com.sky.mapper.EmployeeMapper;
 import com.sky.result.PageResult;
@@ -20,6 +22,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -158,4 +161,34 @@ public class EmployeeServiceImpl implements EmployeeService {
         //employee.setUpdateUser(BaseContext.getCurrentId());
         employeeMapper.update(employee);
     }
+
+    /**
+     * 修改员工密码
+     *
+     * @param passwordEditDTO
+     */
+    public void editPassword(PasswordEditDTO passwordEditDTO) {
+        //对新旧密码md5加密
+        String oldPassword = DigestUtils.md5DigestAsHex(passwordEditDTO.getOldPassword().getBytes());
+        String newPassword = DigestUtils.md5DigestAsHex(passwordEditDTO.getNewPassword().getBytes());
+        //如果新旧密码为空，抛出业务异常
+        if (!StringUtils.hasText(oldPassword) || !StringUtils.hasText(newPassword)) {
+            throw new PasswordEditFailedException(MessageConstant.PASSWORD_EDIT_FAILED);
+        }
+        //查询员工
+        Employee employee = employeeMapper.getByIdWithPassword(BaseContext.getCurrentId(), oldPassword);
+        //如果员工为空，旧密码错误
+        if (employee == null) {
+            throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
+        }
+        //判断输入的新密码是否与数据库的旧密码一样
+        if (newPassword.equals(employee.getPassword())) {
+            //旧密码为空、新密码为空、新密码和旧密码一样，抛出业务异常
+            throw new PasswordEditFailedException(MessageConstant.PASSWORD_EDIT_FAILED);
+        }
+        //修改密码
+        employee.setPassword(newPassword);
+        employeeMapper.update(employee);
+    }
+
 }
