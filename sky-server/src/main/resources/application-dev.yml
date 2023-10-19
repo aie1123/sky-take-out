@@ -8,8 +8,9 @@ sky:
     password: 1234
   alioss:
     endpoint: oss-cn-chengdu.aliyuncs.com
-    access-key-id: LTAI5tReT3C9JNfWh17ZWhSi
-    access-key-secret: WNBaGcvpkw2Me7iarE710LKjgPNePr
+    #需要修改为自己的access-key-id和access-key-secret
+    access-key-id: ************************
+    access-key-secret: ******************************
     bucket-name: aie1123-web-framework
   redis:
     host: localhost
