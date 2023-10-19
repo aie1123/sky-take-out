@@ -9,8 +9,8 @@ sky:
   alioss:
     endpoint: oss-cn-chengdu.aliyuncs.com
     #需要修改为自己的access-key-id和access-key-secret
-    access-key-id: ************************
-    access-key-secret: ******************************
+    access-key-id: 
+    access-key-secret: 
     bucket-name: aie1123-web-framework
   redis:
     host: localhost
@@ -18,5 +18,6 @@ sky:
     password: 123456
     database: 10
   wechat:
-    appid: wx5eb2839955670372
-    secret: 35053aafaca2cbfd4e0385bd582ba741
+    #需要修改为自己的微信小程序appid和secret
+    appid: 
+    secret: 
